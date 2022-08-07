@@ -5,6 +5,10 @@ include 'array.php';
 /*принимает как аргумент три строки — фамилию, имя и отчество. 
 Возвращает как результат их же, но склеенные через пробел. */
 function getFullnameFromParts($surname, $name, $patronomyc){
+    $surname = mb_convert_case($surname, MB_CASE_TITLE, "UTF-8");
+    $name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
+    $patronomyc = mb_convert_case($patronomyc, MB_CASE_TITLE, "UTF-8");
+
     return "$surname $name $patronomyc \r\n"; 
 } 
 
@@ -31,7 +35,9 @@ function getShortName($fullName){
                     0, 
                     2);  
 
-    return $arrayFIO['name']." ".$shortSurname.".";
+    $shortSurname = mb_convert_case($shortSurname, MB_CASE_TITLE, "UTF-8");
+    $name = mb_convert_case($arrayFIO['name'], MB_CASE_TITLE, "UTF-8");
+    return $name." ".$shortSurname.".";
 }
 
 function randomFloat($min = 0, $max = 1) {
@@ -48,23 +54,27 @@ include 'defCompositionGender.php';
 include 'defPerfectPartner.php';
 
 /*Проверка работоспособности функций*/
-//echo getFullnameFromParts('Иванов', 'Иван', 'Иванович');
-//var_dump(getPartsFromFullname('Иванов Иван Иванович'));
-//echo getShortName('Иванов Сергей Андреевич');
-// $prName = getGenderFromName('ИванОВ СергеЙ АндреевИЧ');
-// if ($prName>0)
-//     echo "мужчина";
-// elseif ($prName<0)
-//     echo "женщина";
-// else     
-//     echo "что-то непонятное";
+echo nl2br("getFullnameFromParts():\n");
+echo getFullnameFromParts('ИванОВ', 'Иван', 'Иванович');
+echo nl2br("\n\ngetPartsFromFullname():\n");
+var_dump(getPartsFromFullname('Иванов Иван Иванович'));
+echo nl2br("\n\ngetShortName():\n");
+echo getShortName('иванОВ сергей Андреевич');
+echo nl2br("\n\ngetGenderFromName():\n");
+$prName = getGenderFromName('ИванОВ СергеЙ АндреевИЧ');
+if ($prName>0)
+    echo "мужчина";
+elseif ($prName<0)
+    echo "женщина";
+else     
+    echo "что-то непонятное";
 
+echo nl2br("\n\ngetGenderDescription():\n");
+if (getGenderDescription($example_persons_array)<0)
+    echo "массив не имеет нужных значений";
 
-//if (getGenderDescription($example_persons_array)<0)
-//    echo "массив не имеет нужных значений";
-
-
-if (getPerfectPartner('ИВАНОВ', 'ИВАН', 'ИвановИЧ', $example_persons_array))
+echo nl2br("\n\ngetPerfectPartner():\n");
+if (getPerfectPartner('ИВАНОВ', 'иВАН', 'ИвановИЧ', $example_persons_array))
     echo "массив не имеет нужных значений";
 
 ?>

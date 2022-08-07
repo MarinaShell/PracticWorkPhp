@@ -5,7 +5,7 @@ function getPerfectPartner($surname,
                            $name,
                            $patronomyc,
                            $arrayList){
-                          
+
     /*проверяем является ли переменная массивом*/
     if (!is_array($arrayList))
         return -1;
@@ -17,8 +17,8 @@ function getPerfectPartner($surname,
         if (!array_key_exists('fullname', $arr)){   
             return -1;
         }    
-    }
-
+    }                        
+  
     $fullName = getFullnameFromParts($surname, $name, $patronomyc);
     $res1 = getGenderFromName($fullName);
    
