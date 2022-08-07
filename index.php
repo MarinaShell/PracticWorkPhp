@@ -52,5 +52,8 @@ include 'defCompositionGender.php';
 // else     
 //     echo "что-то непонятное";
 
-getGenderDescription();
+
+//if (getGenderDescription($example_persons_array)<0)
+//    echo "массив не имеет нужных значений";
+
 ?>
