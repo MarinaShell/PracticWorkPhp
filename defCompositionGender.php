@@ -46,16 +46,16 @@ function getGenderDescription($arrayList){
     /*элементов в массиве женщин*/
     $woman = count($arrayListWoman);
     /*проценты мужчин*/
-    $percentMan = intval($man/$all*100);
+    $percentMan = $man/$all*100;
     /*проценты женщин*/
-    $percentWoman = intval($woman/$all*100);
+    $percentWoman = $woman/$all*100;
     /*проценты всех остальных*/
     $percentRest = 100 - $percentMan - $percentWoman;
     echo nl2br("Гендерный состав аудитории:\n");
     echo nl2br("---------------------------\n");
-    echo nl2br("Мужчины - $percentMan%\n");
-    echo nl2br("Женщины - $percentWoman%\n");
-    echo nl2br("Не удалось определить - $percentRest%");
+    echo nl2br("Мужчины - ".number_format($percentMan, 1, '.', '')."%\n");
+    echo nl2br("Женщины - ".number_format($percentWoman, 1, '.', '')."%\n");
+    echo nl2br("Не удалось определить - ".number_format($percentRest, 1, '.', '')."%");
 
     return 1;
 }

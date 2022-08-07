@@ -34,11 +34,18 @@ function getShortName($fullName){
     return $arrayFIO['name']." ".$shortSurname.".";
 }
 
+function randomFloat($min = 0, $max = 1) {
+    return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+}
+
 /*Функция определения пола по ФИО*/
 include 'defGender.php';
 
 /*Определение возрастно-полового состава*/
 include 'defCompositionGender.php';
+
+/*Идеальный подбор пары*/
+include 'defPerfectPartner.php';
 
 /*Проверка работоспособности функций*/
 //echo getFullnameFromParts('Иванов', 'Иван', 'Иванович');
@@ -55,5 +62,9 @@ include 'defCompositionGender.php';
 
 //if (getGenderDescription($example_persons_array)<0)
 //    echo "массив не имеет нужных значений";
+
+
+if (getPerfectPartner('ИВАНОВ', 'ИВАН', 'ИвановИЧ', $example_persons_array))
+    echo "массив не имеет нужных значений";
 
 ?>
